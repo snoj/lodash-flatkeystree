@@ -16,7 +16,6 @@ function keysDeep(obj, depth) {
     if(typeof o.__keysDeepTraversed == 'undefined')
       Object.defineProperty(o, '__keysDeepTraversed', {enumerable:false, value: depth, writable: true});
 
-
     o.__keysDeepTraversed--;
 
     objTraversed.push(o);
@@ -44,33 +43,10 @@ function keysDeep(obj, depth) {
 
   //cleanup traversal flag
   _.each(objTraversed, function(o) {
-    //console.log(typeof o.__keysDeepTraversed, o.__keysDeepTraversed);
     o.__keysDeepTraversed = -1;
   });
 
-  //obj.__keysDeepTraversed = 0;
   return _.keys(r);
 }
 
 module.exports = {keysDeep: keysDeep};
-
-/*_.mixin({
-  keysDeep:
-});
-
-var recurseObj = {
-  a: { level: {d:1, b: 2}},
-  b: [1,2,34,5,6],
-  pt: Promise.resolve("a resolved promise")
-};
-recurseObj.a.level.deeper = recurseObj;
-recurseObj.b.push(recurseObj);
-recurseObj.b.push({a: recurseObj, b:7});
-
-var te = {
-  lvl1: {o:544, k: {test: [1,2,3,4,5,{inserted:false}]}, p: ["gasg", {y:1, n: null}]}, "another": {tree:0}, arr: [1,2,3,4], u : (undefined)
-};
-
-console.log(JSON.stringify(_.keysDeep(te), null, "  "));
-console.log(JSON.stringify(_.keysDeep(recurseObj, 2), null, "  "));
-*/
